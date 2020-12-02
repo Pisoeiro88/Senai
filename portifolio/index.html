@@ -15,31 +15,52 @@
         <h2>Meu nome é Walter</h2>
         <h3>Teste para o Curso de .NET</h3>
         <button type="button" class="btn">
-            <a href="#">Portifolio</a>
+            <a href="#experience">Portifolio</a>
         </button>
     </div>
     </header>
 
-    <section class="section experience-sec">
-        <div class="sectio">Linguagem e Frameworks</div>
+    <section id="experience" class="section experience-sec">
+        <div class="section-header">Linguagem e Frameworks</div>
         <div class="experience-container">
             <div class="experience-item">
                 <span class="item-logo">
-                    <img src="./img/html-5.svg">
+                    <img src="./img/html-5.svg" alt="">
                 </span>
+                <span class="item-nome"> HTML </span>
             </div>
 
             <div class="experience-item">
                 <span class="item-logo">
-                    <img src="./img/css.svg">
+                    <img src="./img/css.svg" alt="">
                 </span>
+                <span class="item-nome"> CSS </span>
             </div>
 
             <div class="experience-item">
                 <span class="item-logo">
-                    <img src="./img/website.svg">
+                    <img src="./img/website.svg" alt="">
                 </span>
+                <span class="item-nome"> .NET </span>
             </div>
+        </div>
+    </section>
+
+    <section class="section contact-sec">
+        <div class="section-header">Contato</div>
+        <div class="contact-countainer">
+            <form id="contact-form">
+                <label for="name">Nome</label>
+                <input type="text" name="name">
+
+                <label for="email">E-Mail</label>
+                <input type="text" name="email">
+                
+                <label for="content">Menssagem</label>
+                <textarea name="name" id="content" placeholder="Escreva algo para mim."></textarea>
+                <button type="submit" class="btn">Enviar</button>
+                
+            </form>
         </div>
     </section>
 </body>
