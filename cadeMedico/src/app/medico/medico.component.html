@@ -1,0 +1,79 @@
+
+
+<div *ngIf="selectedMedico">
+  <app-title [titleVar]="titleMedico + ': ' + selectedMedico.id"></app-title>
+  <br>
+<form [formGroup]="medicoForm" (submit)="submit()">
+  <div class="form-group">
+    <label for="formGroupExampleInput" class="form-label">Nome</label>
+    <input type="text" formControlName="nome" class="form-control"  >
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2" class="form-label">CRM</label>
+    <input type="number" formControlName="crm" class="form-control" >
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2" class="form-label">Especialidade</label>
+    <input type="text" formControlName="especialidade" class="form-control" >
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput2" class="form-label">Telefone</label>
+    <input type="number" formControlName="telefone" class="form-control" >
+  </div>
+  <div class="btn-group">
+  <button class="btn btn-outline-success" [disabled]="!medicoForm.valid">Enviar</button>
+  <button type="button" class="btn btn-outline-info" (click)="back()">Voltar</button>
+  </div>
+</form>
+<br>
+  
+  </div>
+<div *ngIf="!selectedMedico">
+  <app-title [titleVar]="titleMedico"></app-title>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Nome</th>
+        <th scope="col">Especialização</th>
+        <th scope="col">CRM</th>
+        <th scope="col">Telefône</th>
+        <th scope="col">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let medico of medicos">
+        <th scope="row">{{medico.id}}</th>
+        <td>{{medico.nome}}</td>
+        <td>{{medico.especialidade}}</td>
+        <td>{{medico.crm}}</td>
+        <td>{{medico.telefone}}</td>
+        <td>
+          <div>
+            <button class="btn btn-outline-success" (click)="openModal(template)"> Visualizar</button>
+            <button class="btn btn-outline-primary" (click)="selectMedico(medico)"> Editar</button>
+            <button class="btn btn-outline-danger"> Excluir</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+  </table>
+  
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="c#">Modal</h4>
+  </div>
+  <div class="modal-body">
+    This is a modal.
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Fechar</button>
+  </div>
+</ng-template>
+
+
+
+    

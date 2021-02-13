@@ -1,0 +1,62 @@
+<div *ngIf="selectedCidade">
+  <app-title [titleVar]="titleCidade + ': '  + selectedCidade.id"></app-title>
+  <br>
+  <form [formGroup]="cidadeForm" (submit)="submit()">
+  <div class="form-group">
+    <label for="formGroupExampleInput2" class="form-label">Cidade</label>
+    <input type="text"  formControlName="nome" class="form-control" >
+  </div>
+  <div class="form-group">
+    <label for="formGroupExampleInput" class="form-label">Estado</label>
+    <input type="text"  formControlName="estado" class="form-control"  >
+  </div>
+  
+
+<div class="btn-group">
+<button class="btn btn-outline-success" [disabled]="!cidadeForm.valid">Enviar</button>
+<button type="button" class="btn btn-outline-info" (click)="back()">Voltar</button>
+</div>
+
+</form>
+</div>
+<div *ngIf="!selectedCidade">
+  <app-title [titleVar]="titleCidade"></app-title>
+  <br>
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Cidade</th>
+        <th scope="col">Estado</th>
+        <th scope="col">Opções</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let cidade of cidades" style="cursor: pointer;">
+        <th scope="row">{{cidade.id}}</th>
+        <td>{{cidade.nome}}</td>
+        <td>{{cidade.estado}}</td>
+        <td>
+          <div>
+            <button class="btn btn-outline-success"(click)="openModal(template)"> Visualizar</button>
+            <button class="btn btn-outline-primary"(click)="selectCidade(cidade)"> Editar</button>
+            <button class="btn btn-outline-danger"> Excluir</button>
+          </div>
+        </td>
+      </tr>
+      </tbody>
+  </table>
+</div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Modal</h4>
+    
+  </div>
+  <div class="modal-body">
+    This is a modal.  
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-primary" (click)="modalRef.hide()">Fechar</button>
+  </div>
+</ng-template>

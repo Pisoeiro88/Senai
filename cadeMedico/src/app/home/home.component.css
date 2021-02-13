@@ -1,0 +1,27 @@
+.header::before{
+    background: url("/assets/img/Medicina-do-futuro");
+}
+
+.display-6{
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+
+}
+
+.carousel-item{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    position: relative;
+}
+.row{
+    justify-content: center;
+}
