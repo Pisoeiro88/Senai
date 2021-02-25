@@ -40,7 +40,7 @@
           <div>
             <button class="btn btn-outline-success"(click)="openModal(template)"> Visualizar</button>
             <button class="btn btn-outline-primary"(click)="selectCidade(cidade)"> Editar</button>
-            <button class="btn btn-outline-danger"> Excluir</button>
+            <button class="btn btn-outline-danger" (click)="deleteCidade(cidade.id)"> Excluir</button>
           </div>
         </td>
       </tr>

@@ -8,17 +8,17 @@ namespace cadaMedicoApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CidadeController : ControllerBase
+    public class UsuarioController : ControllerBase
     {
         private readonly IRepository _repo;
 
-       public CidadeController(IRepository repo){
+       public UsuarioController(IRepository repo){
            _repo = repo;
        }
        [HttpGet]
        public async Task<IActionResult> Get(){
            try{
-               var result = await _repo.GetAllCidadeModelsAsync(true);
+               var result = await _repo.GetAllUsuarioModelsAsync(true);
                return Ok(result); 
            }
            catch (Exception ex){
@@ -26,10 +26,10 @@ namespace cadaMedicoApi.Controllers
            }
        }
 
-       [HttpGet ("{CidadeId}")]
-       public async Task<IActionResult> getByCidadeId(int CidadeId){
+       [HttpGet ("{UsuarioId}")]
+       public async Task<IActionResult> getByUsuarioId(int UsuarioId){
            try{
-               var result = await _repo.GetCidadeModelsById(CidadeId, true);
+               var result = await _repo.GetUsuarioModelsById(UsuarioId, true);
                return Ok(result); 
            }
            catch (Exception ex){
@@ -37,7 +37,7 @@ namespace cadaMedicoApi.Controllers
            }
        }
        [HttpPost]
-       public async Task<IActionResult> post(CidadeModels model){
+       public async Task<IActionResult> post(UsuarioModels model){
            try{
                _repo.Add(model);
                if(await _repo.SaveChangesAsync()){
@@ -49,11 +49,11 @@ namespace cadaMedicoApi.Controllers
            }
            return BadRequest();
        }
-       [HttpPut("{cidadeId}")]
-       public async Task<IActionResult> put(int cidadeId, CidadeModels models){
+       [HttpPut("{UsuarioId}")]
+       public async Task<IActionResult> put(int usuarioId, UsuarioModels models){
            try{
-               var cidade = await _repo.GetCidadeModelsById(cidadeId, false);
-               if(cidade==null){
+               var usuario = await _repo.GetUsuarioModelsById(usuarioId, true);
+               if(usuario==null){
                    return NotFound();
                }
                _repo.Update(models);
@@ -66,16 +66,16 @@ namespace cadaMedicoApi.Controllers
            }
            return BadRequest();
        }
-           [HttpDelete("{cidadeId}")]
-           public async Task<IActionResult> delete(int cidadeId){
+           [HttpDelete("{usuarioId}")]
+           public async Task<IActionResult> delete(int usuarioId){
                try{
-                   var cidade = await _repo.GetCidadeModelsById(cidadeId, false);
-                   if(cidade == null) return NotFound();
+                   var usuario = await _repo.GetUsuarioModelsById(usuarioId, true);
+                   if(usuario == null) return NotFound();
 
-                   _repo.Delete(cidade);
+                   _repo.Delete(usuario);
 
                    if(await _repo.SaveChangesAsync()){
-                       return Ok(new {menssege="Cidade Deletado!!"});
+                       return Ok("Usuario Deletado!!");
                    }
                }catch(Exception ex){
                    return BadRequest($"Erro: {ex.Message}");

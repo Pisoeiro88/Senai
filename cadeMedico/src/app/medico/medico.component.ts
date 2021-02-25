@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Medico } from '../models/medico';
+import { MedicoService } from '../services/Medico.service';
 
 @Component({
   selector: 'app-medico',
@@ -17,13 +18,7 @@ export class MedicoComponent implements OnInit {
   public modalRef: BsModalRef;
   
 
-  public medicos = [
-    {id:'1',nome:'Luiz',especialidade:'Cardiologista', crm:'987698759', telefone:'4342379867'},
-    {id:'2',nome:'João',especialidade:'Clinico Geral', crm:'987698759', telefone:'4342379867'},
-    {id:'3',nome:'Paulo',especialidade:'Psiquiatra', crm:'987698759', telefone:'4342379867'},
-    {id:'4',nome:'Clebim',especialidade:'Podologista', crm:'987698759', telefone:'4342379867'},
-    {id:'5',nome:'Chico',especialidade:'Otorino', crm:'987698759', telefone:'4342379867'}
-  ]
+  public medicos: Medico[];
 
   openModal(template: TemplateRef<any>) {
     this.modalRef = this.modalService.show(template)
@@ -31,8 +26,9 @@ export class MedicoComponent implements OnInit {
 
   creatForm(){
     this.medicoForm = this.fb.group({
+      id: [''],
       nome: ['',Validators.required],
-      especialidade: ['',Validators.required],
+      especialidade: [''],
       crm: ['',Validators.required],
       telefone: ['',Validators.required]
     })
@@ -45,17 +41,53 @@ export class MedicoComponent implements OnInit {
 
   back(){
     this.selectedMedico = null;
+    this.loadMedico();
   }
 
   submit(){
-    console.log(this.medicoForm.value)
+    this.saveMedico(this.medicoForm.value);
+  }
+
+  saveMedico(medico: Medico){
+    this.medicoService.edit(medico).subscribe(
+      (retorno : Medico) => {
+        console.log(retorno);
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  loadMedico(){
+    this.medicoService.getAll().subscribe(
+      (medicos: Medico[]) => {
+        this.medicos = medicos;
+      },
+      (error: any) => {
+        console.log(error);
+      }
+    );
+  }
+
+  deleteMedico(id: number){
+    this.medicoService.delete(id).subscribe(
+      (modal: any) =>{
+        console.log(modal);
+        this.loadMedico();
+      },
+      (error: any) => {
+        console.log(error);
+      }      
+    );
   }
   
-  constructor(private fb: FormBuilder, private modalService:BsModalService) {
+  constructor(private fb: FormBuilder, private modalService:BsModalService, private medicoService: MedicoService) {
     this.creatForm();
    }
 
   ngOnInit(): void {
+    this.loadMedico();
   }
 
 }

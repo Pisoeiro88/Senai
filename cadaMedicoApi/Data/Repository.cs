@@ -119,5 +119,31 @@ namespace cadeMedicoApi.Data
 
             return await query.FirstOrDefaultAsync();
         }
+        //Usuario
+        public async Task<UsuarioModels[]> GetAllUsuarioModelsAsync(bool includeUsuario)
+        {
+            IQueryable<UsuarioModels> query = _context.Usuarios;
+
+            if(includeUsuario){
+                query = query.Include(u => u.Usuario);
+            }
+            query = query.AsNoTracking().OrderBy(m =>m.Id);
+
+            return await query.ToArrayAsync();
+        }
+        public async Task<UsuarioModels> GetUsuarioModelsById(int usuario, bool includeUsuario)
+        {
+            IQueryable<UsuarioModels> query = _context.Usuarios;
+            
+            if(includeUsuario){
+                query = query.AsNoTracking()
+                                .Include(u => u.Usuario);
+            }
+
+            query = query.AsNoTracking()
+                            .OrderBy(usuario => usuario.Id);
+
+            return await query.FirstOrDefaultAsync();
+        }
     }
 }

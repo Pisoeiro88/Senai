@@ -85,7 +85,7 @@ namespace cadaMedicoApi.Controllers
                    _repo.Delete(medico);
 
                    if(await _repo.SaveChangesAsync()){
-                       return Ok("Medico Deletado!!");
+                       return Ok(new {menssege="Medico Deletado!!"});
                    }
                }catch(Exception ex){
                    return BadRequest($"Erro: {ex.Message}");

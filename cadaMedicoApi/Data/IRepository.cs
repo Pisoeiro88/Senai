@@ -18,5 +18,8 @@ namespace cadaMedicoApi.Data
          //Cidade
          Task<CidadeModels[]> GetAllCidadeModelsAsync(bool includeCidade);
          Task<CidadeModels> GetCidadeModelsById(int cidade, bool includeMedico);
+        //Usuário
+         Task<UsuarioModels[]> GetAllUsuarioModelsAsync(bool includeUsuario);
+         Task<UsuarioModels> GetUsuarioModelsById(int usuario, bool includeUsuario);
     }
 }
